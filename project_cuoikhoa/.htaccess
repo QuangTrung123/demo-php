@@ -1,0 +1,10 @@
+RewriteEngine On
+#rewrite index.php thanh trang-chu
+RewriteRule ^trang-chu$  index.php
+#rewrite index.php thanh gio-hang
+RewriteRule ^gio-hang$  index.php?controller=cart
+#rewrite index.php thanh lien-he
+RewriteRule ^lien-he$  index.php?controller=contact
+
+RewriteRule ^san-pham/danh-muc/(.*)/(.*)$  index.php?controller=products&action=categories&catid=$1
+RewriteRule ^san-pham/chi-tiet/(.*)/(.*)$  index.php?controller=products&action=detail&id=$1

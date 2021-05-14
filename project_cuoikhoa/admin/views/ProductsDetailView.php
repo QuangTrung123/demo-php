@@ -1,0 +1,124 @@
+<?php 
+//load file layout vao day de do du lieu cua view vao file layout do
+$this->layoutPath = "Layout.php";
+?> 
+<div class="col-md-12">  
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <!-- muon upload file thi phai co thuoc tinh enctype="multipart/form-data" o trong the form -->
+            <form method="post" enctype="multipart/form-data" action="<?php echo $action; ?>">
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Name</div>
+                    <div class="col-md-10">
+                        <input type="text" value="<?php echo isset($record->name)?$record->name:""; ?>" name="name" class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Repair</div>
+                    <div class="col-md-10">
+                        <input type="number" value="<?php echo isset($record->amount)?$record->amount:""; ?>" name="amount" class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- rows -->
+                <!-- end rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Input_price</div>
+                    <div class="col-md-10">
+                        <input type="number" value="<?php echo isset($record->input_price)?$record->input_price:""; ?>" name="input_price" class="form-control" disabled>
+                    </div>
+                </div>
+                
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Price</div>
+                    <div class="col-md-10">
+                        <input type="number" value="<?php echo isset($record->price)?$record->price:""; ?>" name="price" class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Discount (1-100%)</div>
+                    <div class="col-md-10">
+                        <input type="number" value="<?php echo isset($record->discount)?$record->discount:"0"; ?>" name="discount" class="form-control" disabled>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Category</div>
+                    <div class="col-md-10">
+                        <select name="category_id" class="form-control" style="width: 200px;" disabled>   
+                        <?php 
+                            $categories = $this->modelListCategories();
+                         ?>                         
+                         <?php foreach($categories as $rows): ?>
+                            <option <?php if(isset($record->category_id)&&$record->category_id==$rows->id): ?> selected <?php endif; ?> value="<?php echo $rows->id; ?>"><?php echo $rows->name; ?></option>
+                            <?php 
+                                $categoriesSub = $this->modelListCategoriesSub($rows->id);
+                             ?>
+                             <?php foreach($categoriesSub as $rowsSub): ?>
+                                <option <?php if(isset($record->category_id)&&$record->category_id==$rowsSub->id): ?> selected <?php endif; ?> value="<?php echo $rowsSub->id; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rowsSub->name; ?></option>
+                            <?php endforeach; ?>
+                         <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <!-- end rows -->                  
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Descripition</div>
+                    <div class="col-md-10">
+                        <textarea class="col-md-10" style="height: 300px;" name="description" id="description" disabled>
+                            <?php echo isset($record->description)?$record->description:""; ?>
+                        </textarea>
+                      <!--   <script type="text/javascript">
+                            CKEDITOR.replace("description");
+                        </script> -->
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Content</div>
+                    <div class="col-md-10">
+                        <textarea class="col-md-10" style="height: 300px;" name="content" id="content" disabled>
+                            <?php echo isset($record->content)?$record->content:""; ?>
+                        </textarea>
+                        <!-- <script type="text/javascript">
+                            CKEDITOR.replace("content");
+                        </script> -->
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <input type="checkbox" <?php if(isset($record->hot)&&$record->hot==1): ?> checked <?php endif; ?> name="hot" id="hot" disabled> <label for="hot">Hot products</label>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2">Upload image</div>
+                    <div class="col-md-10">
+                        <input type="file" name="photo" disabled>
+                    </div>
+                </div>
+                <!-- end rows -->
+                <!-- rows -->
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+
+                        <input onclick="history.go(-1);" type="submit" value="Back" class="btn btn-primary">
+                    </div>
+                </div>
+                <!-- end rows -->
+            </form>
+        </div>
+    </div>
+</div>
